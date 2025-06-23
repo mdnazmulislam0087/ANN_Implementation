@@ -1,12 +1,12 @@
 
 params:
   VALIDATION_DATASIZE : 5000
-  EPOCHS : 30
+  EPOCHS : 1
   BATCH_SIZE : 32
   NUM_CLASSES : 10
   LOSS_FUNCTION : sparse_categorical_crossentropy
   OPTIMIZER : SGD
-  METRICS : accuracy
+  METRICS : ['accuracy']
 
  
 
