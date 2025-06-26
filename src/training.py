@@ -1,7 +1,8 @@
+import os
 import argparse
 from src.utils.common_utils import read_yaml
 from src.utils.data_mgmt import get_data
-from src.utils.model import create_model
+from src.utils.model import create_model, save_model
 
 
 def training(config_path):
@@ -19,6 +20,11 @@ def training(config_path):
     VALIDATION  = (X_valid, y_valid)
 
     history = model.fit(X_train, y_train, epochs = EPOCHS, validation_data = VALIDATION)
+    model_name = config ['artifacts']['MODEL_NAME']
+    model_dir = config['artifacts']['MODEL_DIR']
+    model_dir_path = os.path.join("artifacts", model_dir)
+    os.makedirs(model_dir_path, exist_ok=True)
+    save_model(model, model_name, model_dir_path)
     
 
 
