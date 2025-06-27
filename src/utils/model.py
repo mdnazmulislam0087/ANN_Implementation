@@ -30,3 +30,10 @@ def save_model(model, model_name, model_dir):
     unique_filename = get_unique_filename(model_name)
     path_to_model = os.path.join(model_dir, unique_filename)
     model.save(path_to_model)
+
+#save plt 
+def save_plot(plt, plot_name, plot_dir):
+    unique_filename = get_unique_filename(plot_name)
+    path_to_plot = os.path.join(plot_dir, unique_filename)
+    plt.figure.savefig(path_to_plot)
+
