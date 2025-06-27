@@ -4,6 +4,7 @@ import argparse
 from src.utils.common_utils import read_yaml
 from src.utils.data_mgmt import get_data
 from src.utils.model import create_model, save_model, save_plot
+from src.utils.callbacks import get_callbacks
 
 
 def training(config_path):
@@ -20,15 +21,14 @@ def training(config_path):
     EPOCHS = config['params']['EPOCHS']
     VALIDATION  = (X_valid, y_valid)
 
-    history = model.fit(X_train, y_train, epochs = EPOCHS, validation_data = VALIDATION)
+    CALLBACK_LIST = get_callbacks(config, X_train)
+
+    history = model.fit(X_train, y_train, epochs = EPOCHS, validation_data = VALIDATION, callbacks = CALLBACK_LIST)
     model_name = config ['artifacts']['MODEL_NAME']
     model_dir = config['artifacts']['MODEL_DIR']
     model_dir_path = os.path.join("artifacts", model_dir)
     os.makedirs(model_dir_path, exist_ok=True)
     save_model(model, model_name, model_dir_path)
-
-
-
 
 
     plt = pd.DataFrame(history.history).plot(figsize = (10, 7))
