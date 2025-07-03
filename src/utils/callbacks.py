@@ -19,6 +19,7 @@ def get_callbacks(config, X_train):
     with file_writer.as_default():
         images = np.reshape(X_train[:25], (-1, 28, 28, 1))
         tf.summary.image("Training data", images, max_outputs=25, step=0)
+        
     early_stopping_cb = tf.keras.callbacks.EarlyStopping(patience = config['params']['patience'], restore_best_weights=config['params']['restore_best_weights'])
     
     check_point_name = "model_ckpt.keras"

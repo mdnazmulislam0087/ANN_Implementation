@@ -26,16 +26,18 @@ def training(config_path):
     history = model.fit(X_train, y_train, epochs = EPOCHS, validation_data = VALIDATION, callbacks = CALLBACK_LIST)
     model_name = config ['artifacts']['MODEL_NAME']
     model_dir = config['artifacts']['MODEL_DIR']
-    model_dir_path = os.path.join("artifacts", model_dir)
-    os.makedirs(model_dir_path, exist_ok=True)
+    os.makedirs(model_dir, exist_ok=True) #directory is the folder name, not the path
+    model_dir_path = os.path.join("artifacts", model_dir) # pathincludes filename
+    #os.makedirs(model_dir_path, exist_ok=True)
     save_model(model, model_name, model_dir_path)
 
 
     plt = pd.DataFrame(history.history).plot(figsize = (10, 7))
     plt_name = config['artifacts']['plots_name']
     plt_dir = config['artifacts']['PLOTS_DIR']
+    os.makedirs(plt_dir, exist_ok=True)
     plt_dir_path = os.path.join("artifacts", plt_dir)
-    os.makedirs(plt_dir_path, exist_ok=True)
+    #os.makedirs(plt_dir_path, exist_ok=True)
     save_plot(plt, plt_name, plt_dir_path )
     
 
